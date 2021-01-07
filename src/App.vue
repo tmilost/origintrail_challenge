@@ -16,6 +16,7 @@
   color: #2c3e50;
 
   /* background-color: rgb(9, 12, 43); */
+  background-color: #f8fafd;
 }
 body {
   margin: 0;

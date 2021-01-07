@@ -4,10 +4,10 @@
     <div class="input">
       <el-input
         placeholder="Search Address"
-        v-model="input2"
+        v-model="address"
       >
       </el-input>
-      <el-input placeholder="From Block" v-model="input" style="width: 200px;"></el-input>
+      <el-input placeholder="From Block" v-model="block" style="width: 200px;"></el-input>
       <el-button icon="el-icon-search" v-on:click="newPage()"></el-button>
     </div>
     <el-card class="box-card" shadow="hover">
@@ -34,17 +34,14 @@
 import axios from 'axios';
 export default {
   name: "HelloWorld",
-  props: {
-    msg: String,
-  },
   data: () => ({
-    input2:"",
-    input:"",
+    address:"",
+    block:"",
     etherPrice:[],
   }),
   methods: {
          newPage() {
-     
+      this.$router.push({name:'Address',params:{address:this.address}})
     }
   },
   mounted () {

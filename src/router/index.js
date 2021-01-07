@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Address from '../views/Address.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,12 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/address/:address',
+    name: 'Address',
+    component: Address,
+    props: (route) => ({ address: route.params.address}),
   },
   {
     path: '/about',

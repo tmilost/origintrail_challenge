@@ -67,6 +67,8 @@ import axios from "axios";
 export default {
   props: {
     address: String,
+    startblock: String,
+    endblock: String,
   },
   data: () => ({
     balance: "",
@@ -105,7 +107,7 @@ export default {
           "https://api.etherscan.io/api?module=account&action=txlist&address=" + this.address + "&startblock=0&endblock=99999999&sort=asc&apikey=568E6J3J3XHJZASJV21UFWDF8YKJG2G3JM"
         )
         .then((response) => (this.NormalTransactions = response.data.result));
-        console.log(this.NormalTransactions);
+        console.log(this.startblock);
     },
     
   },

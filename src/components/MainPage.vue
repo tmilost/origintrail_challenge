@@ -7,7 +7,8 @@
         v-model="address"
       >
       </el-input>
-      <el-input placeholder="From Block" v-model="block" style="width: 200px;"></el-input>
+      <el-input placeholder="Start Block" v-model="startblock" style="width: 100px;"></el-input>
+       <el-input placeholder="End Block" v-model="endblock" style="width: 100px;"></el-input>
       <el-button icon="el-icon-search" v-on:click="newPage()"></el-button>
     </div>
     <el-card class="box-card" shadow="hover">
@@ -36,12 +37,13 @@ export default {
   name: "HelloWorld",
   data: () => ({
     address:"",
-    block:"",
+    startblock:"",
+    endblock:"",
     etherPrice:[],
   }),
   methods: {
          newPage() {
-      this.$router.push({name:'Address',params:{address:this.address}})
+      this.$router.push({name:'Address',params:{address:this.address,startblock:this.startblock,endblock:this.endblock}})
     }
   },
   mounted () {

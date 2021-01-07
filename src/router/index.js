@@ -12,10 +12,10 @@ const routes = [
     component: Home
   },
   {
-    path: '/address/:address',
+    path: '/address/:address/startblock/:startblock/endblock/:endblock',
     name: 'Address',
     component: Address,
-    props: (route) => ({ address: route.params.address}),
+    props: (route) => ({ address: route.params.address,startblock: route.params.startblock,endblock: route.params.endblock}),
   },
   {
     path: '/about',

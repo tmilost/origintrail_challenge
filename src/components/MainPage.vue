@@ -1,19 +1,30 @@
 <template>
   <div class="main">
-     <img class="logo" src="https://origintrail.io/images/v2_images/version-brand-color%20(1).svg" alt="OriginTrail" width="400" height="300px"> 
+     <img class="logo" src="../../public/img/logoOrigin.png" alt="OriginTrail" width="300" height="300px"> 
     <div class="input">
-      <el-input
+      <div style="margin-top: 15px;">
+  <el-input placeholder="Search Address" v-model="address" >
+      <el-button  icon="el-icon-search" v-on:click="newPage()"  slot="append"></el-button></el-input>
+       <el-input placeholder="Start Block (optional)" v-model="startblock" style="width: 160px;"></el-input>
+   <el-input placeholder="End Block (optional)" v-model="endblock" style="width: 160px;"></el-input>
+    
+
+  
+</div>
+
+
+      <!-- <el-input
         placeholder="Search Address"
         v-model="address"
       >
       </el-input>
       <el-input placeholder="Start Block" v-model="startblock" style="width: 100px;"></el-input>
        <el-input placeholder="End Block" v-model="endblock" style="width: 100px;"></el-input>
-      <el-button icon="el-icon-search" v-on:click="newPage()"></el-button>
+      <el-button icon="el-icon-search" v-on:click="newPage()"></el-button> -->
     </div>
-    <el-card class="box-card" shadow="hover">
+    <el-card class="box-card" shadow="hover" >
       <div class="ethPrice">
-      <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/1200px-Ethereum-icon-purple.svg.png" alt="OriginTrail" width="55" height="auto" style="float:left;">
+      <img class="logoEth" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/1200px-Ethereum-icon-purple.svg.png" alt="OriginTrail" width="55" height="auto" style="float:left;">
       <div class="divTableBody">
 <div class="divTableRow">
 <div class="divTableCell"> Ether Price </div>
@@ -69,7 +80,7 @@ export default {
   margin: auto;
 }
 .logo{
-  margin: auto;
+  margin-left: 39%;
 }
 .input{
   padding: 35px 0px 35px 0px;

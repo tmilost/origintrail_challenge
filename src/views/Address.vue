@@ -10,11 +10,11 @@
         <div class="divTableBody">
           <div class="divTableRow">
             <div class="divTableCell">Balance:</div>
-            <div class="divTableCell">{{ balance }}</div>
+            <div class="divTableCell">{{ balance }} Ether</div>
           </div>
           <div class="divTableRow">
             <div class="divTableCell">Value:</div>
-            <div class="divTableCell">{{ ethToUsd(balance) }}</div>
+            <div class="divTableCell">$ {{ ethToUsd(balance) }} (@ $1,140.21/ETH)</div>
           </div>
         </div>
       </div>
@@ -24,37 +24,53 @@
        <el-card class="box-card" shadow="hover">
       
       <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label=" list of 'Normal' Transactions" name="first">
+    <el-tab-pane label="'Normal' Transactions" name="first">
           <el-table
     :data="NormalTransactions"
     height="250"
     style="width: 100%">
      <el-table-column
       prop="hash"
-      label="hash"
+      label="Hash"
       width="280">
     </el-table-column>
      <el-table-column
-      prop="timeStamp"
-      label="timeStamp"
+      label="Time"
       width="280">
+       <template slot-scope="scope">
+        {{ timeConverter(scope.row.timeStamp) }}
+      </template>
     </el-table-column>
     <el-table-column
       prop="from"
-      label="from"
+      label="From"
       width="280">
     </el-table-column>
     <el-table-column
       prop="to"
-      label="to"
+      label="To"
       width="280">
     </el-table-column>
-    
+    <el-table-column
+      label="Ether"
+      width="380">
+      <template slot-scope="scope">
+        {{ scope.row.value / 1000000000000000000 }}
+      </template>
+    </el-table-column>
+   
   </el-table>
+   <el-pagination
+  background
+  layout="prev, pager, next"
+   @current-change="handleCurrentChange"
+   v-on:change="handleCurrentChange(handleCurrentChange)"
+  :total="1000">
+</el-pagination>
      </el-tab-pane>
-    <el-tab-pane label="list of 'Internal' Transactions" name="second">Config</el-tab-pane>
-    <el-tab-pane label="list of 'ERC20 - Token Transfer Events'" name="third">Role</el-tab-pane>
-    <el-tab-pane label="list of 'ERC721 - Token Transfer Events'" name="fourth">Task</el-tab-pane>
+    <el-tab-pane label="'Internal' Transactions" name="second">Config</el-tab-pane>
+    <el-tab-pane label="'ERC20 - Token Transfer Events'" name="third">Role</el-tab-pane>
+    <el-tab-pane label="'ERC721 - Token Transfer Events'" name="fourth">Task</el-tab-pane>
   </el-tabs>
 
     </el-card>
@@ -71,19 +87,35 @@ export default {
     endblock: String,
   },
   data: () => ({
-    balance: "",
+    balance: 0,
     etherPriceUsd: 0,
      activeName: 'first',
      NormalTransactions:[],
+       etherPaasdsdriceUsd: 0,
   }),
   methods: {
+     timeConverter(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  return time;
+},
+      handleCurrentChange(item){
+          this.getNormalTransactions(item);
+      },
        handleClick(tab, event) {
         console.log(tab, event);
       },
     ethToUsd(eth) {
       var ethToUsd = 0;
-      ethToUsd = eth * this.etherPriceUsd;
-      return ethToUsd;
+      ethToUsd = eth * this.etherPriceUsd ;
+      return ethToUsd.toFixed(2);
     },
     getBalance() {
       axios
@@ -92,7 +124,7 @@ export default {
             this.address +
             "&tag=latest&module=account&apikey=568E6J3J3XHJZASJV21UFWDF8YKJG2G3JM"
         )
-        .then((response) => (this.balance = response.data.result));
+        .then((response) => (this.balance = response.data.result / 1000000000000000000 ));
     },
     getEthPrice() {
       axios
@@ -101,20 +133,19 @@ export default {
         )
         .then((response) => (this.etherPriceUsd = response.data.result.ethusd));
     },
-    getNormalTransactions(){
+    getNormalTransactions(page){
          axios
         .get(
-          "https://api.etherscan.io/api?module=account&action=txlist&address=" + this.address + "&startblock=0&endblock=99999999&sort=asc&apikey=568E6J3J3XHJZASJV21UFWDF8YKJG2G3JM"
+          "https://api.etherscan.io/api?module=account&action=txlist&address=" + this.address + "&startblock="+this.startblock+"&endblock="+this.endblock+"&page="+page+"&offset=10&sort=asc&apikey=568E6J3J3XHJZASJV21UFWDF8YKJG2G3JM"
         )
         .then((response) => (this.NormalTransactions = response.data.result));
-        console.log(this.startblock);
     },
     
   },
   mounted() {
     this.getBalance();
     this.getEthPrice();
-      this.getNormalTransactions();
+      this.getNormalTransactions(1);
     
   },
 };
@@ -137,7 +168,7 @@ export default {
 }
 .divTableCell,
 .divTableHead {
-  width: 25px;
+
   display: table-cell;
   padding: 3px 10px;
 }

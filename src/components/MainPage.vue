@@ -43,6 +43,13 @@ export default {
   }),
   methods: {
          newPage() {
+           this.address = this.address.replace(' ', '');
+           if(this.startblock==""){
+              this.startblock = "0";
+           }
+           if(this.endblock==""){
+              this.endblock="99999999";
+           }
       this.$router.push({name:'Address',params:{address:this.address,startblock:this.startblock,endblock:this.endblock}})
     }
   },

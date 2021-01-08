@@ -24,14 +24,19 @@
        <el-card class="box-card" shadow="hover">
       
       <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="'Normal' Transactions" name="first">
+    <el-tab-pane label="Transactions" name="first">
           <el-table
     :data="NormalTransactions"
     height="250"
     style="width: 100%">
      <el-table-column
       prop="hash"
-      label="Hash"
+      label="Txn Hash"
+      width="280">
+    </el-table-column>
+        <el-table-column
+      prop="blockNumber"
+      label="Block"
       width="280">
     </el-table-column>
      <el-table-column
@@ -68,9 +73,9 @@
   :total="1000">
 </el-pagination>
      </el-tab-pane>
-    <el-tab-pane label="'Internal' Transactions" name="second">Config</el-tab-pane>
-    <el-tab-pane label="'ERC20 - Token Transfer Events'" name="third">Role</el-tab-pane>
-    <el-tab-pane label="'ERC721 - Token Transfer Events'" name="fourth">Task</el-tab-pane>
+    <el-tab-pane label="Internal Txns" name="second">Config</el-tab-pane>
+    <el-tab-pane label="Erc20 Token Txns" name="third">Role</el-tab-pane>
+    <el-tab-pane label="ERC721 Token Txns" name="fourth">Task</el-tab-pane>
   </el-tabs>
 
     </el-card>

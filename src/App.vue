@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <el-menu
-      :default-active="activeIndex"
+      
       class="el-menu-demo"
       mode="horizontal"
-      @select="handleSelect"
+     
     >
       <div class="menuItems">
         <el-menu-item style="float: left;">
@@ -31,7 +31,7 @@
           style="float: right; width:59px;"
           ><i class="fab fa-github fa-lg"></i
         ></el-menu-item>
-        <el-menu-item v-on:click="homePage()" style="float: right;">
+        <el-menu-item v-on:click="homePage()" style="float: right; width:79px">
           <b>Home</b>
         </el-menu-item>
       </div>
@@ -70,7 +70,7 @@ export default {
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+ 
 
   /* background-color: rgb(9, 12, 43); */
   background-color: #f8fafd;

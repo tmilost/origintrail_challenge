@@ -1,6 +1,8 @@
 <template>
   <div class="main">
-    <div class="contract ">Contract {{ address }}</div>
+       <div class="row">
+    <div class="contract "> <p>Contract: {{ address }}</p> </div>
+    </div>
     <div class="overview">
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
@@ -20,14 +22,14 @@
       </div>
     </el-card>
 </div>
-<div class="">
+<div class="tableCard">
        <el-card class="box-card" shadow="hover">
       
       <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="Transactions" name="first">
           <el-table
     :data="NormalTransactions"
-    height="250"
+    height="590"
     style="width: 100%">
      <el-table-column
       prop="hash"
@@ -158,7 +160,7 @@ export default {
 
 <style scoped>
 .main {
-  height: calc(100vh - 57px);
+  height: 100%;
   width: 1270px;
   margin: auto;
 }
@@ -189,5 +191,24 @@ export default {
 }
 .divTableBody {
   display: table-row-group;
+}
+.row{
+   width: 1270px;
+   height: 20px;
+  padding: 35px 0px 15px 0px;
+}
+.el-card{
+
+  margin: 25px 0px 0px 0px;
+  
+}
+.el-pagination{
+  margin-top: 15px;
+  margin-left: 35%;
+}
+p{
+  color:#77838f;
+  margin: 0px;
+  font-size: 1.21875rem;
 }
 </style>

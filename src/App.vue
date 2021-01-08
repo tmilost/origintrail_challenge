@@ -17,23 +17,23 @@
           />
         </el-menu-item>
         <el-menu-item
-          v-on:click="toLink(cvUrl)"
+          v-on:click="toLink(config.cvUrl)"
           style="float: right; width:59px;"
           ><i class="fas fa-address-card fa-lg"></i
         ></el-menu-item>
         <el-menu-item
-          v-on:click="toLink(linkedInUrl)"
+          v-on:click="toLink(config.linkedInUrl)"
           style="float: right; width:59px;"
           ><i class="fab fa-linkedin fa-lg"></i
         ></el-menu-item>
         <el-menu-item
-          v-on:click="toLink(gitUrl)"
+          v-on:click="toLink(config.gitUrl)"
           style="float: right; width:59px;"
           ><i class="fab fa-github fa-lg"></i
         ></el-menu-item>
-        <el-menu-item v-on:click="homePage()" style="float: right;"
-          > <b>Home</b> </el-menu-item
-        >
+        <el-menu-item v-on:click="homePage()" style="float: right;">
+          <b>Home</b>
+        </el-menu-item>
       </div>
     </el-menu>
     <router-view />
@@ -41,11 +41,10 @@
 </template>
 
 <script>
+import config from "../public/config.json";
 export default {
   data: () => ({
-    cvUrl: "https://tmilost.github.io/Milos_Terzic_CV_Eng/",
-    linkedInUrl: "https://www.linkedin.com/in/milos-terzic-a60709183/",
-    gitUrl: "https://github.com/tmilost",
+    config: config,
   }),
   methods: {
     toLink(adress) {

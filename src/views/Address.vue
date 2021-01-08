@@ -158,7 +158,7 @@ export default {
 
 <style scoped>
 .main {
-  height: 100vh;
+  height: calc(100vh - 57px);
   width: 1270px;
   margin: auto;
 }

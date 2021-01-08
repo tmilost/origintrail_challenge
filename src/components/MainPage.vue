@@ -75,12 +75,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .main{
-  height: 100vh;
+  height: calc(100vh - 57px);
   width: 1270px;
   margin: auto;
 }
 .logo{
   margin-left: 39%;
+  padding: 5% 0% 0% 0%;
 }
 .input{
   padding: 35px 0px 35px 0px;

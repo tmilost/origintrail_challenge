@@ -188,25 +188,46 @@ export default {
   }),
   methods: {
          newPage() {
+           if(this.address==""){
+              console.log("error");
+           }
+           else{
            this.address = this.address.replace(' ', '');
            if(this.startblock==""){
               this.startblock = "0";
            }
            if(this.endblock==""){
-              this.endblock=this.ethBlockNumber;
+              this.endblock=this.ethBlockNumber.toString();
            }
       this.$router.push({name:'Address',params:{address:this.address,startblock:this.startblock,endblock:this.endblock}})
+      }
     },
-      newPage1() {
+     async newPage1() {
+       if(this.addressTime==""){
+ console.log("error");
+       }else{
+
+       
          this.addressTime = this.addressTime.replace(' ', '');
          var timestamp = this.value2 / 1000;
-     
-      this.getBlockNumberByTimestamp(timestamp);
+         this.endblock=this.ethBlockNumber.toString();
 
-        this.$router.push({name:'BalancecheckTool'})
+        //  this.getBlockNumberByTimestamp(timestamp);
+
+        try {
+        const response = await axios.get(
+          'https://api.etherscan.io/api?module=block&action=getblocknobytime&timestamp=' + timestamp +'&closest=before&apikey='+ config.apikey
+        );
+        this.startblock = response.data.result;
+      } catch (e) {
+        this.errors.push(e);
+      }
+      
+        this.$router.push({name:'BalancecheckTool',params:{address:this.addressTime,startblock:this.startblock,endblock:this.endblock}})
 
   console.log(this.blockNumberByTimestamp);
            console.log(timestamp);
+           }
     },
     exchangeCurency(usd,currency){
       if(currency=="Eur"){
@@ -219,13 +240,12 @@ export default {
       return asd.toFixed(2);
       }
     },
-     getBlockNumberByTimestamp(timestamp){
- axios
-      .get('https://api.etherscan.io/api?module=block&action=getblocknobytime&timestamp='+ timestamp +'&closest=before&apikey='+ config.apikey)
-      .then(response => (this.blockNumberByTimestamp  = response.data.result))
+//      getBlockNumberByTimestamp(timestamp){
+//  axios
+//       .get('https://api.etherscan.io/api?module=block&action=getblocknobytime&timestamp='+ timestamp +'&closest=before&apikey='+ config.apikey)
+//       .then(response => (this.startblock  = response.data.result))
+//     },
      
-    },
-
     getEthPrice(){
  axios
       .get('https://api.etherscan.io/api?module=stats&action=ethprice&apikey='+config.apikey)
@@ -284,5 +304,4 @@ p{
   margin: 0px;
   font-size: 1.21875rem;
 }
-
 </style>

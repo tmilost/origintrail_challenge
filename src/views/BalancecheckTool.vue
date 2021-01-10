@@ -53,11 +53,14 @@
 import axios from "axios";
 import config from "../../public/config.json";
 export default {
+   props: {
+    address: String,
+    startblock: String,
+    endblock: String,
+  },
   data: () => ({
     config: config,
-    address: "0x4f31e3fa9577defea191e121caa1a980a50b6894",
-    startblock: "4987570",
-    endblock: "99999999999",
+   
     page: 1,
     balance: 0,
     targetBalance: 0,

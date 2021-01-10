@@ -11,12 +11,11 @@
               <div class="divTableCell">Current Balance:</div>
               <div class="divTableCell">{{ balance }} Ether</div>
             </div>
-          
           </div>
         </div>
       </el-card>
 
-       <el-card class="box-card" shadow="hover">
+      <el-card class="box-card" shadow="hover">
         <div slot="header" class="clearfix">
           <span>Token Quantity</span>
         </div>
@@ -30,7 +29,7 @@
         </div>
       </el-card>
 
-        <el-card class="box-card" shadow="hover">
+      <el-card class="box-card" shadow="hover">
         <div slot="header" class="clearfix">
           <span>Quantity Changed</span>
         </div>
@@ -38,13 +37,13 @@
           <div class="divTableBody">
             <div class="divTableRow">
               <div class="divTableCell"></div>
-              <div class="divTableCell">{{ balance - targetBalance }} Ether</div>
+              <div class="divTableCell">
+                {{ balance - targetBalance }} Ether
+              </div>
             </div>
           </div>
         </div>
       </el-card>
-
-
     </div>
   </div>
 </template>
@@ -53,14 +52,14 @@
 import axios from "axios";
 import config from "../../public/config.json";
 export default {
-   props: {
+  props: {
     address: String,
     startblock: String,
     endblock: String,
   },
   data: () => ({
     config: config,
-   
+
     page: 1,
     balance: 0,
     targetBalance: 0,
@@ -84,7 +83,6 @@ export default {
         .then((response) => (this.NormalTransactions = response.data.result));
     },
     async calculateEthOnAdress() {
-
       try {
         const response = await axios.get(
           "https://api.etherscan.io/api?action=balance&address=" +
@@ -96,53 +94,46 @@ export default {
       } catch (e) {
         this.errors.push(e);
       }
-  this.targetBalance = this.balance;
-       var status =true;
-        var page= 1;
-for(page;status == true;page++){
+      this.targetBalance = this.balance;
+      var status = true;
+      var page = 1;
+      for (page; status == true; page++) {
         try {
-        const response = await axios.get(
-          "https://api.etherscan.io/api?module=account&action=txlist&address=" +
-            this.address +
-            "&startblock=" +
-            this.startblock +
-            "&endblock=" +
-            this.endblock +
-            "&page=" +
-            page +
-            "&offset=100&sort=asc&apikey=" +
-            config.apikey
-        );
-        if(response.data.status=="1"){
-            this.NormalTransactions = response.data.result ;
-        
+          const response = await axios.get(
+            "https://api.etherscan.io/api?module=account&action=txlist&address=" +
+              this.address +
+              "&startblock=" +
+              this.startblock +
+              "&endblock=" +
+              this.endblock +
+              "&page=" +
+              page +
+              "&offset=100&sort=asc&apikey=" +
+              config.apikey
+          );
+          if (response.data.status == "1") {
+            this.NormalTransactions = response.data.result;
 
-            this.NormalTransactions.forEach(element => {
-        if(element.from==this.address){
-          this.targetBalance = this.targetBalance  + (element.value / 1000000000000000000) + (element.gasPrice / 1000000000000000000 * element.gasUsed);
-          
+            this.NormalTransactions.forEach((element) => {
+              if (element.from == this.address) {
+                this.targetBalance =
+                  this.targetBalance +
+                  element.value / 1000000000000000000 +
+                  (element.gasPrice / 1000000000000000000) * element.gasUsed;
+              } else if (element.to == this.address) {
+                this.targetBalance =
+                  this.targetBalance -
+                  element.value / 1000000000000000000 +
+                  (element.gasPrice / 1000000000000000000) * element.gasUsed;
+              }
+            });
+          } else {
+            status = false;
+          }
+        } catch (e) {
+          this.errors.push(e);
         }
-        else if(element.to==this.address){
-           this.targetBalance = this.targetBalance  - (element.value / 1000000000000000000) + (element.gasPrice / 1000000000000000000 * element.gasUsed);
-           
-        }
-         console.log("////"+this.targetBalance);
-      });
-        }
-        else{
-          status=false;
-        }
-        
-      } catch (e) {
-        this.errors.push(e);
       }
-        
-}
-
-     
-      
-     
-     
     },
   },
   mounted() {
@@ -158,7 +149,7 @@ for(page;status == true;page++){
   width: 1270px;
   margin: auto;
 }
-.el-card{
+.el-card {
   width: 390px;
   margin: 155px 25px 0px 0px;
   float: left;
@@ -174,7 +165,6 @@ for(page;status == true;page++){
 }
 .divTableCell,
 .divTableHead {
-
   display: table-cell;
   padding: 3px 10px;
 }

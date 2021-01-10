@@ -32,7 +32,7 @@
           <el-tab-pane label="Transactions" name="first">
             <el-table
               :data="NormalTransactions"
-              height="590"
+              height="770"
               style="width: 100%"
             >
               <el-table-column prop="hash" label="Txn Hash" width="280">
@@ -66,7 +66,7 @@
           <el-tab-pane label="Internal Txns" name="second">
             <el-table
               :data="InternalTransactions"
-              height="590"
+              height="770"
               style="width: 100%"
             >
               <el-table-column prop="hash" label="Txn Hash" width="280">
@@ -276,6 +276,6 @@ span {
   color: #77838f;
 }
 .tableCard {
-  padding-bottom: 90px;
+  padding-bottom: 50px;
 }
 </style>

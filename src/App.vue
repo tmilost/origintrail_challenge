@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-    <el-menu
-      
-      class="el-menu-demo"
-      mode="horizontal"
-     
-    >
+    <el-menu class="el-menu-demo" mode="horizontal">
       <div class="menuItems">
-        <el-menu-item style="float: left;">
+        <el-menu-item
+          style="float: left;"
+          v-on:click="toLink(config.origintrailUrl)"
+        >
           <img
             class="logo"
             src="../public/img/originTrailLogo.png"
@@ -70,9 +68,7 @@ export default {
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
- 
 
-  /* background-color: rgb(9, 12, 43); */
   background-color: #f8fafd;
 }
 body {

@@ -333,7 +333,7 @@ p {
   font-size: 1.21875rem;
 }
 .overview {
-  margin: 155px 2px 0px 0px;
+  padding: 155px 2px 0px 0px;
 }
 span {
   color: #77838f;

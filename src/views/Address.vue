@@ -275,4 +275,7 @@ p {
 span {
   color: #77838f;
 }
+.tableCard {
+  padding-bottom: 90px;
+}
 </style>

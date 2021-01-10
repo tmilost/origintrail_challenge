@@ -53,14 +53,14 @@
     </div>
 
     <div class="row">
-      <p>Ether Price / 1 ETH =</p>
+      <p>Ether Price 1 ETH =</p>
 
       <el-card class="box-card" shadow="hover">
         <div class="ethPrice">
           <div style="float:left; padding-right:15px;font-size:2rem;">₿</div>
           <div class="divTableBody">
             <div class="divTableRow">
-              <div class="divTableCell"><h7>BTC</h7></div>
+              <div class="divTableCell"><span>BTC</span></div>
             </div>
             <div class="divTableRow">
               <div class="divTableCell">{{ etherPrice.ethbtc }}</div>
@@ -74,7 +74,7 @@
           <div style="float:left; padding-right:15px;font-size:2rem;">🇺🇸</div>
           <div class="divTableBody">
             <div class="divTableRow">
-              <div class="divTableCell"><h7>USD</h7></div>
+              <div class="divTableCell"><span>USD</span></div>
             </div>
             <div class="divTableRow">
               <div class="divTableCell">{{ etherPrice.ethusd }}</div>
@@ -88,7 +88,7 @@
           <div style="float:left; padding-right:15px;font-size:2rem;">🇪🇺</div>
           <div class="divTableBody">
             <div class="divTableRow">
-              <div class="divTableCell"><h7>EUR</h7></div>
+              <div class="divTableCell"><span>EUR</span></div>
             </div>
             <div class="divTableRow">
               <div class="divTableCell">
@@ -104,7 +104,7 @@
           <div style="float:left; padding-right:15px;font-size:2rem;">🇳🇴</div>
           <div class="divTableBody">
             <div class="divTableRow">
-              <div class="divTableCell"><h7>NOK</h7></div>
+              <div class="divTableCell"><span>NOK</span></div>
             </div>
             <div class="divTableRow">
               <div class="divTableCell">
@@ -120,7 +120,7 @@
           <div style="float:left; padding-right:15px;font-size:2rem;">🇨🇦</div>
           <div class="divTableBody">
             <div class="divTableRow">
-              <div class="divTableCell"><h7>CAD</h7></div>
+              <div class="divTableCell"><span>CAD</span></div>
             </div>
             <div class="divTableRow">
               <div class="divTableCell">
@@ -137,7 +137,7 @@
 
           <div class="divTableBody">
             <div class="divTableRow">
-              <div class="divTableCell"><h7>HKD</h7></div>
+              <div class="divTableCell"><span>HKD</span></div>
             </div>
             <div class="divTableRow">
               <div class="divTableCell">
@@ -358,9 +358,10 @@ export default {
   width: 500px;
   float: left;
   padding-right: 25px;
+  margin-left: 7px;
 }
 .el-card {
-  width: 190px;
+  width: 195px;
   margin: 15px 7px 15px 7px;
   float: left;
 }
@@ -369,7 +370,7 @@ p {
   margin: 0px;
   font-size: 1.21875rem;
 }
-h7 {
+span {
   color: #77838f;
 }
 </style>

@@ -272,4 +272,7 @@ p {
   margin: 0px;
   font-size: 1.21875rem;
 }
+span {
+  color: #77838f;
+}
 </style>

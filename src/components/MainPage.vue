@@ -17,6 +17,28 @@
     </div>
 
      <div class="row">
+       <p> ETH Account Balance Checker </p>
+      <div style="margin-top: 15px;">
+  <el-input placeholder="Search Address" v-model="addressTime" >
+      <el-button  icon="el-icon-search" v-on:click="newPage1()"  slot="append"></el-button></el-input>
+      <el-date-picker
+      v-model="value2"
+      type="datetime"
+      placeholder="Select date and time"
+      :picker-options="pickerOptions"
+      value-format="timestamp"
+      default-time="00:00:00">
+    </el-date-picker>
+    
+
+  
+</div>
+
+
+    </div>
+    
+<!-- 
+     <div class="row">
     <p>  Ether Price / 1 ETH = </p>
     <el-card class="box-card" shadow="hover" >
       <div class="ethPrice">
@@ -115,7 +137,7 @@
   </div>
 </el-card>
 
-     </div>
+     </div> -->
 
 
   </div>
@@ -123,15 +145,46 @@
 
 <script>
 import axios from 'axios';
+import config from "../../public/config.json";
+
 export default {
   name: "HelloWorld",
   data: () => ({
+    config:config,
     address:"",
     startblock:"",
     endblock:"",
+    addressTime:"",
     etherPrice:[],
     currencyRates:[],
+    blockNumberByTimestamp:"",
+    ethBlockNumber:"",
     eur:0,
+     pickerOptions: {
+          shortcuts: [{
+            text: 'Today',
+            onClick(picker) {
+              picker.$emit('pick', new Date());
+            }
+          }, {
+            text: 'Yesterday',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24);
+              picker.$emit('pick', date);
+            }
+          }, {
+            text: 'A week ago',
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', date);
+            }
+          }]
+        },
+        value1: '',
+        value2: '',
+        value3: ''
   }),
   methods: {
          newPage() {
@@ -140,9 +193,20 @@ export default {
               this.startblock = "0";
            }
            if(this.endblock==""){
-              this.endblock="99999999";
+              this.endblock=this.ethBlockNumber;
            }
       this.$router.push({name:'Address',params:{address:this.address,startblock:this.startblock,endblock:this.endblock}})
+    },
+      newPage1() {
+         this.addressTime = this.addressTime.replace(' ', '');
+         var timestamp = this.value2 / 1000;
+     
+      this.getBlockNumberByTimestamp(timestamp);
+
+        this.$router.push({name:'BalancecheckTool'})
+
+  console.log(this.blockNumberByTimestamp);
+           console.log(timestamp);
     },
     exchangeCurency(usd,currency){
       if(currency=="Eur"){
@@ -155,9 +219,16 @@ export default {
       return asd.toFixed(2);
       }
     },
+     getBlockNumberByTimestamp(timestamp){
+ axios
+      .get('https://api.etherscan.io/api?module=block&action=getblocknobytime&timestamp='+ timestamp +'&closest=before&apikey='+ config.apikey)
+      .then(response => (this.blockNumberByTimestamp  = response.data.result))
+     
+    },
+
     getEthPrice(){
  axios
-      .get('https://api.etherscan.io/api?module=stats&action=ethprice&apikey=568E6J3J3XHJZASJV21UFWDF8YKJG2G3JM')
+      .get('https://api.etherscan.io/api?module=stats&action=ethprice&apikey='+config.apikey)
       .then(response => (this.etherPrice  = response.data.result))
      
     },
@@ -167,11 +238,17 @@ export default {
       .then(response => (this.currencyRates  = response.data.rates));
 
     },
+    getEthBlockNumber(){
+       axios
+      .get('https://api.etherscan.io/api?module=proxy&action=eth_blockNumber&apikey='+config.apikey)
+      .then(response => (this.ethBlockNumber  = parseInt(response.data.result, 16)))
+    }
   },
   
   mounted () {
    this.getEthPrice();
    this.getCurrencyRates();
+   this.getEthBlockNumber();
   }
 };
 </script>

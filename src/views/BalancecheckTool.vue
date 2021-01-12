@@ -57,7 +57,9 @@
               <div class="divTableCell"><span>BTC</span></div>
             </div>
             <div class="divTableRow">
-              <div class="divTableCell">{{ etherPrice.ethbtc }}</div>
+              <div class="divTableCell">
+                {{ (etherPrice.ethbtc * this.targetBalance).toFixed(3) }}
+              </div>
             </div>
           </div>
         </div>
@@ -79,7 +81,9 @@
               <div class="divTableCell"><span>USD</span></div>
             </div>
             <div class="divTableRow">
-              <div class="divTableCell">{{ etherPrice.ethusd }}</div>
+              <div class="divTableCell">
+                {{ exchangeCurency(etherPrice.ethusd, "USD") }}
+              </div>
             </div>
           </div>
         </div>
@@ -277,8 +281,9 @@ export default {
     exchangeCurency(usd, currency) {
       var eur = usd / this.currencyRates.USD;
       eur = eur * this.targetBalance;
+      var usdCaculate = usd * this.targetBalance;
       if (currency == "USD") {
-        return usd.toFixed(2);
+        return usdCaculate.toFixed(2);
       }
       if (currency == "EUR") {
         var value = eur;

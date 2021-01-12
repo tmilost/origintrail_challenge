@@ -65,7 +65,15 @@
 
       <el-card class="box-card" shadow="hover">
         <div class="ethPrice">
-          <div style="float:left; padding-right:15px;font-size:2rem;">🇺🇸</div>
+          <div style="float:left; padding-right:15px;">
+            <img
+              class="logo"
+              src="../../public/img/flag-united-states.png"
+              alt="OriginTrail"
+              width="35"
+              height="35px"
+            />
+          </div>
           <div class="divTableBody">
             <div class="divTableRow">
               <div class="divTableCell"><span>USD</span></div>
@@ -79,7 +87,15 @@
 
       <el-card class="box-card" shadow="hover">
         <div class="ethPrice">
-          <div style="float:left; padding-right:15px;font-size:2rem;">🇪🇺</div>
+          <div style="float:left; padding-right:15px;">
+            <img
+              class="logo"
+              src="../../public/img/flag-european-union.png"
+              alt="OriginTrail"
+              width="35"
+              height="35px"
+            />
+          </div>
           <div class="divTableBody">
             <div class="divTableRow">
               <div class="divTableCell"><span>EUR</span></div>
@@ -95,7 +111,15 @@
 
       <el-card class="box-card" shadow="hover">
         <div class="ethPrice">
-          <div style="float:left; padding-right:15px;font-size:2rem;">🇳🇴</div>
+          <div style="float:left; padding-right:15px;">
+            <img
+              class="logo"
+              src="../../public/img/flag-norway.png"
+              alt="OriginTrail"
+              width="35"
+              height="35px"
+            />
+          </div>
           <div class="divTableBody">
             <div class="divTableRow">
               <div class="divTableCell"><span>NOK</span></div>
@@ -111,7 +135,15 @@
 
       <el-card class="box-card" shadow="hover">
         <div class="ethPrice">
-          <div style="float:left; padding-right:15px;font-size:2rem;">🇨🇦</div>
+          <div style="float:left; padding-right:15px;">
+            <img
+              class="logo"
+              src="../../public/img/flag-canada.png"
+              alt="OriginTrail"
+              width="35"
+              height="35px"
+            />
+          </div>
           <div class="divTableBody">
             <div class="divTableRow">
               <div class="divTableCell"><span>CAD</span></div>
@@ -127,7 +159,15 @@
 
       <el-card class="box-card" shadow="hover">
         <div class="ethPrice">
-          <div style="float:left; padding-right:15px;font-size:2rem;">🇭🇰</div>
+          <div style="float:left; padding-right:15px;">
+            <img
+              class="logo"
+              src="../../public/img/flag-hong-kong.png"
+              alt="OriginTrail"
+              width="35"
+              height="35px"
+            />
+          </div>
 
           <div class="divTableBody">
             <div class="divTableRow">

@@ -367,7 +367,7 @@ export default {
     },
     getCurrencyRates() {
       axios
-        .get("https://api.exchangeratesapi.io/latest")
+        .get("http://api.exchangeratesapi.io/v1/latest?access_key=25b2098df312b795f17bfb643159a37b&format=1")
         .then((response) => (this.currencyRates = response.data.rates));
     },
   },
